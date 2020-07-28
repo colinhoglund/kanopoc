@@ -6,11 +6,6 @@ import (
 	"kanopoc/pkg/provider/helm"
 )
 
-type Releaser interface {
-	ReleaseName() string
-	Chart() string
-}
-
 type Controller struct {
 	client *helm.Client
 }
