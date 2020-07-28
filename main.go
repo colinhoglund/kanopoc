@@ -1,11 +1,11 @@
 package main
 
 import (
-	"kanopoc/controller/helm"
+	"kanopoc/controller/modules"
 )
 
 func main() {
-	c := helm.New()
+	c := modules.New()
 	c.Dump()
 	c.Apply()
 	c.Dump()

@@ -1,10 +1,9 @@
-package helm
+package modules
 
 import (
-	helmprovider "kanopoc/provider/helm"
-
 	"kanopoc/module/drone"
 	"kanopoc/module/traefik"
+	"kanopoc/provider/helm"
 )
 
 type Releaser interface {
@@ -13,11 +12,11 @@ type Releaser interface {
 }
 
 type Controller struct {
-	client *helmprovider.Client
+	client *helm.Client
 }
 
 func New() *Controller {
-	c := helmprovider.New()
+	c := helm.New()
 	return &Controller{c}
 }
 
