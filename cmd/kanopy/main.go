@@ -1,14 +1,14 @@
 package main
 
 import (
-	"kanopoc/pkg/controller/modules"
+	"fmt"
+	"kanopoc/pkg/cli"
+	"os"
 )
 
 func main() {
-	c := modules.New()
-	c.Dump()
-	c.Apply()
-	c.Dump()
-	c.Apply()
-	c.Dump()
+	if err := cli.NewRootCommand().Execute(); err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
 }
