@@ -1,9 +1,9 @@
 package modules
 
 import (
-	"kanopoc/module/drone"
-	"kanopoc/module/traefik"
-	"kanopoc/provider/helm"
+	"kanopoc/pkg/module/drone"
+	"kanopoc/pkg/module/traefik"
+	"kanopoc/pkg/provider/helm"
 )
 
 type Releaser interface {

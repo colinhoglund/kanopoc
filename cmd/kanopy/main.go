@@ -1,7 +1,7 @@
 package main
 
 import (
-	"kanopoc/controller/modules"
+	"kanopoc/pkg/controller/modules"
 )
 
 func main() {
