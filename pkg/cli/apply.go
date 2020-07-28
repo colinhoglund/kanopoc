@@ -10,7 +10,8 @@ type ApplyCommand struct{ *cobra.Command }
 
 func NewApplyCommand() *ApplyCommand {
 	cmd := &ApplyCommand{&cobra.Command{
-		Use: "apply",
+		Use:   "apply",
+		Short: "apply all modules",
 	}}
 	cmd.Run = cmd.run
 	return cmd
@@ -18,9 +19,6 @@ func NewApplyCommand() *ApplyCommand {
 
 func (c *ApplyCommand) run(*cobra.Command, []string) {
 	m := modules.New()
-	m.Dump()
-	m.Apply()
-	m.Dump()
 	m.Apply()
 	m.Dump()
 }

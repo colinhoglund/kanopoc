@@ -3,8 +3,8 @@ package helm
 import "fmt"
 
 type release struct {
-	versions int
-	chart    string
+	version int
+	chart   string
 }
 
 type Client struct {
@@ -26,7 +26,7 @@ func (c *Client) Apply(name, chart string) {
 		// upgrade
 		r := c.releases[name]
 		r.chart = chart
-		r.versions++
+		r.version++
 	}
 }
 
@@ -35,9 +35,8 @@ func (c *Client) Delete(name string) {
 }
 
 func (c *Client) Dump() {
-	fmt.Println("===start===")
+	fmt.Println("=> Dumping Releases")
 	for name, rel := range c.releases {
-		fmt.Println(name, rel.versions, rel.chart)
+		fmt.Printf("==> name: %s, version: %d, chart: %s\n", name, rel.version, rel.chart)
 	}
-	fmt.Println("===end===")
 }
