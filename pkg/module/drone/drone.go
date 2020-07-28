@@ -1,11 +1,16 @@
 package drone
 
+import "kanopoc/pkg/builder/data"
+
 type Config struct {
-	name, data string
+	name string
+	data *data.Object
 }
 
-func New(name, data string) *Config {
-	return &Config{name, data}
+func New() *Config {
+	c := &Config{name: "drone"}
+	c.data = data.New().WithName(c.name)
+	return c
 }
 
 func (t *Config) ReleaseName() string {
@@ -13,5 +18,5 @@ func (t *Config) ReleaseName() string {
 }
 
 func (t *Config) Chart() string {
-	return t.data
+	return t.data.String()
 }

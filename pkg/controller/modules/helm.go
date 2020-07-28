@@ -26,8 +26,8 @@ func (c *Controller) Dump() {
 
 func (c *Controller) Apply() {
 	modules := []Releaser{
-		traefik.New("traefik", "traefik data"),
-		drone.New("drone", "drone data"),
+		traefik.New(),
+		drone.New(),
 	}
 
 	for _, mod := range modules {
