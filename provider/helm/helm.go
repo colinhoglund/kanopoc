@@ -8,11 +8,11 @@ type release struct {
 }
 
 type Client struct {
-	releases map[string]release
+	releases map[string]*release
 }
 
 func New() *Client {
-	c := &Client{map[string]release{}}
+	c := &Client{map[string]*release{}}
 	return c
 }
 
@@ -21,7 +21,7 @@ func (c *Client) Apply(name, chart string) {
 	switch {
 	case !exists:
 		// install
-		c.releases[name] = release{1, chart}
+		c.releases[name] = &release{1, chart}
 	default:
 		// upgrade
 		r := c.releases[name]
@@ -35,5 +35,9 @@ func (c *Client) Delete(name string) {
 }
 
 func (c *Client) Dump() {
-	fmt.Println(c.releases)
+	fmt.Println("===start===")
+	for name, rel := range c.releases {
+		fmt.Println(name, rel.versions, rel.chart)
+	}
+	fmt.Println("===end===")
 }

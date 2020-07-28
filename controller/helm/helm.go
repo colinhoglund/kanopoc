@@ -1,6 +1,11 @@
 package helm
 
-import helmprovider "kanopoc/provider/helm"
+import (
+	helmprovider "kanopoc/provider/helm"
+
+	"kanopoc/module/drone"
+	"kanopoc/module/traefik"
+)
 
 type Releaser interface {
 	ReleaseName() string
@@ -20,10 +25,13 @@ func (c *Controller) Dump() {
 	c.client.Dump()
 }
 
-func (c *Controller) Apply(r Releaser) {
-	c.client.Apply(r.ReleaseName(), r.Chart())
-}
+func (c *Controller) Apply() {
+	modules := []Releaser{
+		traefik.New("traefik", "traefik data"),
+		drone.New("drone", "drone data"),
+	}
 
-func (c *Controller) Delete(r Releaser) {
-	c.client.Delete(r.ReleaseName())
+	for _, mod := range modules {
+		c.client.Apply(mod.ReleaseName(), mod.Chart())
+	}
 }
