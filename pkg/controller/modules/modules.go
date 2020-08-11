@@ -10,9 +10,8 @@ type Controller struct {
 	client *helm.Client
 }
 
-func New() *Controller {
-	c := helm.New()
-	return &Controller{c}
+func New(h *helm.Client) *Controller {
+	return &Controller{h}
 }
 
 func (c *Controller) Dump() {

@@ -2,6 +2,7 @@ package cli
 
 import (
 	"kanopoc/pkg/controller/modules"
+	"kanopoc/pkg/provider/helm"
 
 	"github.com/spf13/cobra"
 )
@@ -18,7 +19,9 @@ func NewApplyCommand() *ApplyCommand {
 }
 
 func (c *ApplyCommand) run(*cobra.Command, []string) {
-	m := modules.New()
+	h := helm.New()
+	m := modules.New(h)
+
 	m.Apply()
 	m.Dump()
 }
