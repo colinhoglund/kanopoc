@@ -1,0 +1,7 @@
+---
+dataDirectory: data
+loadOrder:
+  - base.yaml
+  - "{{.Value}}/"
+  - doesnotexist/
+  - doesnotexist.yaml

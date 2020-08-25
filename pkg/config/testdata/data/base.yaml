@@ -1,0 +1,6 @@
+---
+base: base
+override: base
+dontinterpolate: "example.com/${notavar}"
+list:
+  - base
