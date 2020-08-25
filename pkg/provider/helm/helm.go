@@ -25,8 +25,10 @@ func (c *Client) Apply(name, chart string) {
 	default:
 		// upgrade
 		r := c.releases[name]
-		r.chart = chart
-		r.version++
+		if chart != r.chart {
+			r.chart = chart
+			r.version++
+		}
 	}
 }
 
