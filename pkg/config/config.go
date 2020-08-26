@@ -13,6 +13,11 @@ import (
 	"github.com/micro/go-micro/v3/config/source/memory"
 )
 
+// Global represents global (shared between modules) configuration for Kanopy clusters
+type Global struct {
+	Domain string `json:"domain"`
+}
+
 // Config implementation for managing hierarchical configuration
 type Config struct {
 	config.Config
@@ -87,4 +92,15 @@ func (c *Config) SliceMerged(path ...string) ([]interface{}, error) {
 	}
 
 	return slice, nil
+}
+
+// Global scans the current configuration into a Global
+func (c *Config) Global() (Global, error) {
+	g := Global{}
+
+	if err := c.Scan(&g); err != nil {
+		return Global{}, err
+	}
+
+	return g, nil
 }

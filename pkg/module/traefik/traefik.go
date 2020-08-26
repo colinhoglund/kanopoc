@@ -1,13 +1,21 @@
 package traefik
 
-import "kanopoc/pkg/builder/data"
+import (
+	"fmt"
+	"kanopoc/pkg/builder/data"
+	"kanopoc/pkg/config"
+)
 
 type Config struct {
-	Name string `json:"name"`
+	Name   string `json:"name"`
+	Domain string `json:"domain"`
 }
 
-func New() *Config {
-	return &Config{Name: "traefik"}
+func New(conf config.Global) *Config {
+	return &Config{
+		Name:   "traefik",
+		Domain: fmt.Sprintf("traefik.%s", conf.Domain),
+	}
 }
 
 func (c *Config) ReleaseName() string {
@@ -15,5 +23,5 @@ func (c *Config) ReleaseName() string {
 }
 
 func (c *Config) Chart() string {
-	return data.New().WithName(c.Name).String()
+	return data.New().WithName(c.Name).AddValue(c.Domain).String()
 }

@@ -3,7 +3,8 @@ package data
 import "fmt"
 
 type Object struct {
-	Name string
+	Name   string
+	Values []string
 }
 
 func New() *Object {
@@ -15,6 +16,11 @@ func (o *Object) WithName(name string) *Object {
 	return o
 }
 
+func (o *Object) AddValue(s string) *Object {
+	o.Values = append(o.Values, s)
+	return o
+}
+
 func (o *Object) String() string {
-	return fmt.Sprintf("%s chart", o.Name)
+	return fmt.Sprintf("Name: %s chart, Values: %v", o.Name, o.Values)
 }

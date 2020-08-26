@@ -1,6 +1,7 @@
 package modules
 
 import (
+	"fmt"
 	"kanopoc/pkg/config"
 	"kanopoc/pkg/module/drone"
 	"kanopoc/pkg/module/traefik"
@@ -17,12 +18,20 @@ func New(h *helm.Client, c *config.Config) *Controller {
 }
 
 func (c *Controller) Dump() {
+	global, _ := c.config.Global()
+	fmt.Println("=> Dumping Globals")
+	fmt.Printf("%#v\n", global)
 	c.client.Dump()
 }
 
 func (c *Controller) Apply() error {
+	global, err := c.config.Global()
+	if err != nil {
+		return err
+	}
+
 	moduleMap := map[string]Releaser{
-		"traefik": traefik.New(),
+		"traefik": traefik.New(global),
 		"drone":   drone.New(),
 	}
 
