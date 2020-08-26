@@ -28,20 +28,20 @@ func (c *Controller) Apply() error {
 		"drone":   drone.New(),
 	}
 
-	modules, err := c.configureModules(moduleMap)
+	releasers, err := c.configureReleasers(moduleMap)
 	if err != nil {
 		return err
 	}
 
-	for _, mod := range modules {
+	for _, mod := range releasers {
 		c.client.Apply(mod.ReleaseName(), mod.Chart())
 	}
 
 	return nil
 }
 
-func (c *Controller) configureModules(moduleMap map[string]interface{}) ([]Releaser, error) {
-	var modules []Releaser
+func (c *Controller) configureReleasers(moduleMap map[string]interface{}) ([]Releaser, error) {
+	var releasers []Releaser
 
 	for path, mod := range moduleMap {
 		if err := c.config.Get(path).Scan(mod); err != nil {
@@ -53,8 +53,8 @@ func (c *Controller) configureModules(moduleMap map[string]interface{}) ([]Relea
 			return nil, errors.New("Releaser type assertion error")
 		}
 
-		modules = append(modules, r)
+		releasers = append(releasers, r)
 	}
 
-	return modules, nil
+	return releasers, nil
 }
