@@ -1,6 +1,7 @@
 package modules
 
 import (
+	"errors"
 	"kanopoc/pkg/config"
 	"kanopoc/pkg/module/drone"
 	"kanopoc/pkg/module/traefik"
@@ -21,19 +22,15 @@ func (c *Controller) Dump() {
 }
 
 func (c *Controller) Apply() error {
-	t := traefik.New()
-	if err := c.config.Get("traefik").Scan(t); err != nil {
-		return err
+
+	moduleMap := map[string]interface{}{
+		"traefik": traefik.New(),
+		"drone":   drone.New(),
 	}
 
-	d := drone.New()
-	if err := c.config.Get("drone").Scan(d); err != nil {
+	modules, err := c.configureModules(moduleMap)
+	if err != nil {
 		return err
-	}
-
-	modules := []Releaser{
-		t,
-		d,
 	}
 
 	for _, mod := range modules {
@@ -41,4 +38,23 @@ func (c *Controller) Apply() error {
 	}
 
 	return nil
+}
+
+func (c *Controller) configureModules(moduleMap map[string]interface{}) ([]Releaser, error) {
+	var modules []Releaser
+
+	for path, mod := range moduleMap {
+		if err := c.config.Get(path).Scan(mod); err != nil {
+			return nil, err
+		}
+
+		r, ok := mod.(Releaser)
+		if !ok {
+			return nil, errors.New("Releaser type assertion error")
+		}
+
+		modules = append(modules, r)
+	}
+
+	return modules, nil
 }
