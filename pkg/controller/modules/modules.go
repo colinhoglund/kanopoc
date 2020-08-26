@@ -21,7 +21,6 @@ func (c *Controller) Dump() {
 }
 
 func (c *Controller) Apply() error {
-
 	moduleMap := map[string]Releaser{
 		"traefik": traefik.New(),
 		"drone":   drone.New(),

@@ -41,7 +41,11 @@ func applyRunE(cmd *cobra.Command, args []string) error {
 	}
 
 	m := modules.New(helm.New(), conf)
-	m.Apply()
+
+	if err := m.Apply(); err != nil {
+		return err
+	}
+
 	m.Dump()
 
 	return nil
