@@ -3,20 +3,17 @@ package traefik
 import "kanopoc/pkg/builder/data"
 
 type Config struct {
-	name string
-	data *data.Object
+	Name string `json:"name"`
 }
 
 func New() *Config {
-	c := &Config{name: "traefik"}
-	c.data = data.New().WithName(c.name)
-	return c
+	return &Config{Name: "traefik"}
 }
 
-func (t *Config) ReleaseName() string {
-	return t.name
+func (c *Config) ReleaseName() string {
+	return c.Name
 }
 
-func (t *Config) Chart() string {
-	return t.data.String()
+func (c *Config) Chart() string {
+	return data.New().WithName(c.Name).String()
 }

@@ -1,0 +1,4 @@
+drone:
+  name: overridedrone
+traefik:
+  name: overridetraefik

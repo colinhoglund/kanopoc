@@ -1,10 +1,14 @@
 package cli
 
 import (
+	"kanopoc/pkg/config"
+	"kanopoc/pkg/config/hierarchy"
 	"kanopoc/pkg/controller/modules"
 	"kanopoc/pkg/provider/helm"
+	"path/filepath"
 
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 )
 
 func NewApplyCommand() *cobra.Command {
@@ -17,13 +21,28 @@ func NewApplyCommand() *cobra.Command {
 	configFlags(cmd)
 	dryRunFlag(cmd)
 
-	cmd.Run = applyRun
+	cmd.RunE = applyRunE
 
 	return cmd
 }
 
-func applyRun(cmd *cobra.Command, args []string) {
-	m := modules.New(helm.New())
+func applyRunE(cmd *cobra.Command, args []string) error {
+	configFile := viper.GetString("configFile")
+	dataDir := viper.GetString("dataDir")
+
+	loadOrder := []string{
+		"global",
+		filepath.Join("cluster", args[0]),
+	}
+
+	conf, err := config.NewFromHierarchy(hierarchy.New(configFile, dataDir, loadOrder...))
+	if err != nil {
+		return err
+	}
+
+	m := modules.New(helm.New(), conf)
 	m.Apply()
 	m.Dump()
+
+	return nil
 }

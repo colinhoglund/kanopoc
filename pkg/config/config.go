@@ -5,12 +5,12 @@ import (
 	"kanopoc/pkg/config/hierarchy"
 
 	simplejson "github.com/bitly/go-simplejson"
-	readerjson "github.com/micro/go-micro/v2/config/reader/json"
+	readerjson "github.com/micro/go-micro/v3/config/reader/json"
 
-	"github.com/micro/go-micro/v2/config"
-	"github.com/micro/go-micro/v2/config/reader"
-	"github.com/micro/go-micro/v2/config/source/file"
-	"github.com/micro/go-micro/v2/config/source/memory"
+	"github.com/micro/go-micro/v3/config"
+	"github.com/micro/go-micro/v3/config/reader"
+	"github.com/micro/go-micro/v3/config/source/file"
+	"github.com/micro/go-micro/v3/config/source/memory"
 )
 
 // Config implementation for managing hierarchical configuration
