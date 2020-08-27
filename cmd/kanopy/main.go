@@ -2,8 +2,9 @@ package main
 
 import (
 	"fmt"
-	"kanopoc/internal/cli"
 	"os"
+
+	"github.com/colinhoglund/kanopoc/internal/cli"
 )
 
 func main() {

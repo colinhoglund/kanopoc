@@ -1,12 +1,12 @@
 package cli
 
 import (
-	"kanopoc/pkg/config"
-	"kanopoc/pkg/config/hierarchy"
-	"kanopoc/pkg/controller/modules"
-	"kanopoc/pkg/provider/helm"
 	"path/filepath"
 
+	"github.com/colinhoglund/kanopoc/pkg/config"
+	"github.com/colinhoglund/kanopoc/pkg/config/hierarchy"
+	"github.com/colinhoglund/kanopoc/pkg/controller/modules"
+	"github.com/colinhoglund/kanopoc/pkg/provider/helm"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )

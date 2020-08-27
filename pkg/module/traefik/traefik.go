@@ -2,8 +2,9 @@ package traefik
 
 import (
 	"fmt"
-	"kanopoc/pkg/builder/data"
-	"kanopoc/pkg/config"
+
+	"github.com/colinhoglund/kanopoc/pkg/builder/data"
+	"github.com/colinhoglund/kanopoc/pkg/config"
 )
 
 type Config struct {

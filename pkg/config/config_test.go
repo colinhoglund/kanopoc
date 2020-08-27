@@ -2,11 +2,11 @@ package config
 
 import (
 	"io/ioutil"
-	"kanopoc/pkg/config/hierarchy"
 	"path/filepath"
 	"reflect"
 	"testing"
 
+	"github.com/colinhoglund/kanopoc/pkg/config/hierarchy"
 	"github.com/ghodss/yaml"
 )
 

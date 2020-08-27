@@ -2,11 +2,11 @@ package config
 
 import (
 	"encoding/json"
-	"kanopoc/pkg/config/hierarchy"
 
 	simplejson "github.com/bitly/go-simplejson"
 	readerjson "github.com/micro/go-micro/v3/config/reader/json"
 
+	"github.com/colinhoglund/kanopoc/pkg/config/hierarchy"
 	"github.com/micro/go-micro/v3/config"
 	"github.com/micro/go-micro/v3/config/reader"
 	"github.com/micro/go-micro/v3/config/source/file"

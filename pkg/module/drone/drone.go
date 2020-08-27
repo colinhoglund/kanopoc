@@ -1,6 +1,6 @@
 package drone
 
-import "kanopoc/pkg/builder/data"
+import "github.com/colinhoglund/kanopoc/pkg/builder/data"
 
 type Config struct {
 	Name string `json:"name"`

@@ -2,10 +2,11 @@ package modules
 
 import (
 	"fmt"
-	"kanopoc/pkg/config"
-	"kanopoc/pkg/module/drone"
-	"kanopoc/pkg/module/traefik"
-	"kanopoc/pkg/provider/helm"
+
+	"github.com/colinhoglund/kanopoc/pkg/config"
+	"github.com/colinhoglund/kanopoc/pkg/module/drone"
+	"github.com/colinhoglund/kanopoc/pkg/module/traefik"
+	"github.com/colinhoglund/kanopoc/pkg/provider/helm"
 )
 
 type Controller struct {

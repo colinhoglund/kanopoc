@@ -1,4 +1,4 @@
-module kanopoc
+module github.com/colinhoglund/kanopoc
 
 go 1.14
 
